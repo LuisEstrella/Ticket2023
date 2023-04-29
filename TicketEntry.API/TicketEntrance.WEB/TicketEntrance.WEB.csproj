@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\entrada.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketEntry.Shared\TicketEntry.Shared.csproj" />
   </ItemGroup>
 
 </Project>

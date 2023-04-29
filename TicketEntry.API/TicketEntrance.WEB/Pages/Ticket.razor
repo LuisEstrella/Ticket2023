@@ -1,5 +1,154 @@
-﻿<h3>Ticket</h3>
+﻿@page "/ticket"
+@using TicketEntrance.WEB.Repositories;
+@using TicketEntry.Shared.DTOs;
+@using TicketEntry.Shared.Enums;
+@inject IRepository repository
+@inject SweetAlertService sweetAlertService
+
+
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="mb-3">
+                        <label>Id Boleta</label>
+                        <div>
+                            <InputNumber class="form-control" @bind-Value="@ticket.Id"  />
+                            
+                        </div>
+                    </div>
+                    
+                    @if (disabled == true)
+                    {
+                    <div class="mb-3">
+                    <label>Seleccione Tribuna</label>
+                        <div>
+                            <InputSelect @bind-Value="ticket.Entrance" class="form-select">
+                                @foreach (var value in Enum.GetValues(typeof(EntranceType)))
+                                {
+                                    <option value="@value">@value</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    }
+                @if (disabled  == true)
+                {
+                    
+                    <button class="btnCreate float-end" @onclick="CreteTicketAsync"><i class="oi oi-check" /> Registrar boleta</button>
+                }else{
+
+                <button class="btnCreate float-end" @onclick="HandleClick"><i class="oi oi-check" /> Verificar boleta</button>
+                }
+                </div>
+            </div>
+        </div>
+    </div>
+
+@if(showInfo == true)
+{    
+<div class="container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Hora de Uso</th>
+                <th style="width:260px"> Puerta</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                    @ticketdata.UseDate
+                    </td>
+                    <td>
+                    @ticketdata.Entrance
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    </div>
+}
+
+@if(showInfo2 == true)
+{
+<div class="card">
+        <div class="card-body">
+            Tu boleta fue registrada con exito
+        </div>
+    </div>
+    
+}
+
 
 @code {
 
+    private TicketDTO? ticket = new();
+    private TicketDTO? ticketdata = new();
+    private bool disabled = false;
+    private bool showInfo = false;
+    private bool showInfo2 = false;
+    //private EntranceType entranceType= 0;
+
+    //[CascadingParameter]
+    //BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+
+    private async Task HandleClick()
+    {
+
+        var responseHttp = await repository.Get<TicketDTO>($"/api/ticket/{ticket!.Id}");
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+
+        ticketdata = responseHttp.Response;
+        if (ticketdata.Used == true)
+        {
+            disabled = false;
+            showInfo = true;
+        }
+        else
+        {
+            showInfo = false;
+            disabled = true;
+        }
+
+
+    }
+
+
+    private async Task CreteTicketAsync()
+    {
+
+        var responseHttp = await repository.Put<TicketDTO>("/api/ticket", ticket!);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        showInfo2 = true;
+        //await sweetAlertService.FireAsync("Confirmacion", "Su boleta fue registrada con éxito..", SweetAlertIcon.Success);
+
+    }  
+
+    private async Task CreteProductAsync2()
+    {
+
+        
+
+    }
 }

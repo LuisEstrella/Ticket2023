@@ -25,12 +25,12 @@ namespace TicketEntry.API.Controllers
                 return BadRequest("Boleta no valida");
             }
 
-            if (TicketFind.Used == true)
-            {
-                return BadRequest("La boleta ya fue utilizada");
-            }
+            //if (TicketFind.Used == true)
+            //{
+            //    return Ok(TicketFind);
+            //}
 
-            return Ok();
+            return Ok(TicketFind);
         }
 
         [HttpPut]
@@ -43,8 +43,8 @@ namespace TicketEntry.API.Controllers
                 return BadRequest("Error al actualizar");
             }
             ticket.Id = ticketDTO.Id;
-            ticket.UseDate = ticketDTO.UseDate;
-            ticket.Used = ticketDTO.Used;
+            ticket.Used = true;
+            ticket.UseDate = DateTime.Now;
             ticket.Entrance = ticketDTO.Entrance;
 
             _context.Update(ticket);
