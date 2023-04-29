@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketEntry.API", "TicketEn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketEntry.Shared", "TicketEntry.Shared\TicketEntry.Shared.csproj", "{DC8BA18F-329E-4532-A1BB-FA97990E87F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketEntrance.WEB", "TicketEntrance.WEB\TicketEntrance.WEB.csproj", "{F98A512E-F43B-40EF-A4BC-D75DE15C1028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DC8BA18F-329E-4532-A1BB-FA97990E87F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC8BA18F-329E-4532-A1BB-FA97990E87F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC8BA18F-329E-4532-A1BB-FA97990E87F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98A512E-F43B-40EF-A4BC-D75DE15C1028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98A512E-F43B-40EF-A4BC-D75DE15C1028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98A512E-F43B-40EF-A4BC-D75DE15C1028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98A512E-F43B-40EF-A4BC-D75DE15C1028}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
